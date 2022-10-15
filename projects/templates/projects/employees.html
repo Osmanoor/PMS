@@ -1,0 +1,54 @@
+{% extends 'projects/base.html' %}
+
+{% block title %} Employees {%endblock title%}
+
+{% block content %}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Employees</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Employees</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Employees</h5>
+
+            <!-- Default Table -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Position</th>
+                  <th scope="col">Points</th>
+                  <th scope="col">Availability</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for employee in employees %}
+                      <tr>
+                          <th scope="row" >{{employee.pk}}</th>
+                          <td><a href = "{% url 'employee' employee.pk %}">{{employee.name}}</a></td>
+                          <td>{{employee.position}}</td>
+                          <td>{{employee.points}}</td>
+                          <td>90</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+            <!-- End Default Table Example -->
+          </div>
+        </div>
+
+</main><!-- End #main -->
+{% endblock content %}

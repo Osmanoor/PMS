@@ -1,0 +1,61 @@
+{% extends 'projects/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Employee {%endblock title%}
+
+{% block content %}
+<main id="main" class="main">
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-5">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-7 pagetitle">
+            
+            <div class="card p-3">
+              <form action="" method="post">
+                {% csrf_token %}
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">completion</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for item in list %}
+                            <tr>
+                                <th scope="row" >{{item.0.pk}}</th>
+                                <td><a href = "{% url 'project' item.0.pk %}">{{item.0.name}}</a></td>
+                                <td>
+                                  <div class="form-check">
+                                    <input type="checkbox" name="inputs" id="option{{item.0.pk}}" value={{item.0.pk}} {% if item.0.completion %} checked {% endif %}/>
+                                  </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'projects/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Project {%endblock title%}
+
+{% block content %}
+<main id="main" class="main">
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-5">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-7 pagetitle">
+            
+            <div class="card p-3">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Employee</th>
+                        <th scope="col">completion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in tasks %}
+                            <tr>
+                                <th scope="row" >{{item.pk}}</th>
+                                <td>{{item.name}}</td>
+                                <td>{{item.employee}}</td>
+                                <td>
+                                    {% if item.completion == False %}
+                                    <span class="text-danger fw-semibold">No</span>
+                                    {% else %}
+                                        <span class="text-success fw-semibold">Yes</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock content %}
